@@ -15,7 +15,8 @@ COPY ["package.json", "npm-shrinkwrap.json", "/linting/"]
 COPY ["Gemfile", "Gemfile.lock", "/linting/"]
 RUN gem install bundler \
     && bundle install --jobs 4 \
-    && npm install --no-bin-links
+    && npm install
+ENV PATH /linting/node_modules/.bin:$PATH
 
 RUN mkdir -p /app
 WORKDIR /app/
